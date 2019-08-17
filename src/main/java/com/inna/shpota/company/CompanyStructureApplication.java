@@ -1,4 +1,4 @@
-package com.inna.shpota.companystructure;
+package com.inna.shpota.company;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

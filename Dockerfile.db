@@ -1,0 +1,3 @@
+FROM library/postgres:11.5
+
+MAINTAINER "Inna Shpota <shpota_inna@ukr.net>"

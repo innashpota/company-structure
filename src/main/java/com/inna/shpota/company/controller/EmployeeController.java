@@ -20,9 +20,9 @@ public class EmployeeController {
         service.add(employee);
     }
 
-    @PutMapping
-    public void edit(@RequestBody Employee employee) {
-        service.edit(employee);
+    @PutMapping("/{id}")
+    public void edit(@PathVariable("id") Long id, @RequestBody Employee employee) {
+        service.edit(id, employee);
     }
 
     @DeleteMapping("/{id}")

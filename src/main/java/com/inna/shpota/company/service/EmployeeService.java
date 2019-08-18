@@ -18,7 +18,7 @@ public class EmployeeService {
         repository.save(employee);
     }
 
-    public void edit(Employee updated) {
+    public void edit(Long id, Employee updated) {
         repository.save(updated);
     }
 

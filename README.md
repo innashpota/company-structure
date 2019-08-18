@@ -5,23 +5,52 @@ Company Structure [![Build Status](https://travis-ci.com/shpotainna/company-stru
 
 ## Environment Setup
 
-The application requires:
+You need to have Docker to be able to build and run the application.
 
-- JDK 1.11
-- Gradle 5.4.1
-- Docker 18.09.2
+## How to build and run
 
-## How to run
+1. Build the backend application image
 
-1. Build docker image for database
+    ```docker build -t=cs-backend -f Dockerfile.backend .```
+    
+2. Build the frontend application image
+
+    ```docker build -t=cs-frontend -f Dockerfile.frontend .```
+    
+3. Create a docker network
+
+    ```docker network create cs-net```
+
+4. Start the database 
 
     ```
-    docker build -t company-structure:company-structure-db -f Dockerfile.db .
-    ```
-2. Run the database 
-
-    ```
-    docker run -p 5432:5432 -e POSTGRES_USER=company-structure -e POSTGRES_PASSWORD=company-structure -e POSTGRES_DB=company-structure --name company-structure_db company-structure:company-structure-db
+    docker run -p 5432:5432 \
+      -e POSTGRES_USER=company-structure \
+      -e POSTGRES_PASSWORD=company-structure \
+      -e POSTGRES_DB=company-structure \
+      --name cs-db \
+      --net=cs-net \
+      postgres:11.5
     ```
     
-    The following commands must be performed in separate terminal session.
+5. Start the backend
+
+    ```
+    docker run --name=cs_backend \
+         --net=cs-net \
+         -p 8080:8080 \
+         cs-backend:latest
+    ```    
+6. Start the frontend
+
+    ```
+    docker run --name=cs_frontend \
+         -p 4200:4200 \
+         cs-frontend:latest
+    ```
+
+The application is accessible on http://localhost:4200.
+
+## Showcase
+
+![main-window](./showcase/showcase.jpeg)

@@ -1,7 +1,9 @@
 Company Structure [![Build Status](https://travis-ci.com/shpotainna/company-structure.svg?branch=master)](https://travis-ci.com/shpotainna/company-structure)
 =================
 
-## A company structure with a list of projects and their users
+A simple CDUD application representing a company structure.
+
+The application is built using Java 11, Spring Boot 2 and PostgreSQL on the backend, Angular 8 and TypeScript on the frontend, Docker for building and running.
 
 ## Environment Setup
 

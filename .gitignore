@@ -58,16 +58,15 @@ out/
 .DS_Store
 
 ### Angular ###
-webapp/company-structure/e2e/
-webapp/company-structure/*.iml
-webapp/company-structure/package-lock.json
+webapp/e2e/
+webapp/*.iml
+webapp/package-lock.json
 # dependencies
-webapp/company-structure/node_modules
+webapp/node_modules
 # compiled output
-webapp/company-structure/dist
-webapp/company-structure/tmp
-webapp/company-structure/out-tsc
-webapp/company-structure/browserslist
-webapp/company-structure/karma.conf.js
-webapp/company-structure/tsconfig.app.json
-webapp/company-structure/tsconfig.spec.json
+webapp/dist
+webapp/tmp
+webapp/out-tsc
+webapp/browserslist
+webapp/karma.conf.js
+webapp/tsconfig.spec.json

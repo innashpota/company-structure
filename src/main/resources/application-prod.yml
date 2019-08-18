@@ -1,0 +1,3 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://cs-db:5432/postgres

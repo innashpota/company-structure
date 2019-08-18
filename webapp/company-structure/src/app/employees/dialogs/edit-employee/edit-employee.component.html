@@ -1,0 +1,78 @@
+<div class="container">
+  <h3 mat-dialog-title>Edit employee</h3>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput
+               class="form-control"
+               placeholder="First name"
+               [(ngModel)]="employee.firstName"
+               name="firstName"
+               required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput
+               class="form-control"
+               placeholder="Last name"
+               [(ngModel)]="employee.lastName"
+               name="lastName"
+               required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <mat-select class="form-control"
+                    placeholder="Gender"
+                    [(ngModel)]="employee.gender"
+                    name="gender"
+                    required>
+          <mat-option *ngFor="let gender of genders" [value]="gender">{{gender}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput
+               class="form-control"
+               placeholder="Birthday"
+               [(ngModel)]="employee.birthday"
+               name="birthday"
+               required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput
+               class="form-control"
+               placeholder="City"
+               [(ngModel)]="employee.city"
+               name="city">
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions class="button-row">
+      <button mat-button
+              [disabled]="!formControl.valid"
+              [mat-dialog-close]="employee"
+              cdkFocusInitial>
+        Save
+      </button>
+      <button mat-button
+              (click)="onNoClick()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

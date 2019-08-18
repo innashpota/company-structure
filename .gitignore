@@ -56,3 +56,18 @@ out/
 .vscode/
 
 .DS_Store
+
+### Angular ###
+webapp/company-structure/e2e/
+webapp/company-structure/*.iml
+webapp/company-structure/package-lock.json
+# dependencies
+webapp/company-structure/node_modules
+# compiled output
+webapp/company-structure/dist
+webapp/company-structure/tmp
+webapp/company-structure/out-tsc
+webapp/company-structure/browserslist
+webapp/company-structure/karma.conf.js
+webapp/company-structure/tsconfig.app.json
+webapp/company-structure/tsconfig.spec.json

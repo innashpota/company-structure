@@ -1,7 +1,17 @@
 spring:
   jpa:
+    database: H2
+    show-sql: true
     hibernate:
       ddl-auto: create-drop
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
   datasource:
-    driver-class-name: org.h2.Driver
+    platform: h2
     url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver

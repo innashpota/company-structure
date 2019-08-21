@@ -31,6 +31,7 @@ public class EmployeeServiceIntegrationTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @Test
+    @DirtiesContext
     public void shouldFailToCreateGivenNullRepository() {
         EmployeeRepository repository = null;
         expectedException.expect(IllegalArgumentException.class);
@@ -84,11 +85,11 @@ public class EmployeeServiceIntegrationTest {
 
     @Test
     @DirtiesContext
-    public void shouldShowAll() {
+    public void shouldFindAll() {
         repository.saveAll(getEmployees());
         List<Employee> expected = getEmployees();
 
-        Iterable<Employee> actual = service.showAll();
+        Iterable<Employee> actual = service.findAll();
 
         Employee firstActual = actual.iterator().next();
         assertEquals(expected.get(0).getFirstName(), firstActual.getFirstName());

@@ -1,13 +1,13 @@
 package com.inna.shpota.company.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
@@ -25,6 +25,14 @@ public class Employee {
 
     private String city;
 
+    @ManyToMany(cascade = ALL)
+    @JoinTable(
+            name = "employee_project",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    private Set<Project> projects = new HashSet<>();
+
     public Employee() {
     }
 
@@ -40,6 +48,18 @@ public class Employee {
         this.gender = gender;
         this.birthday = birthday;
         this.city = city;
+    }
+
+    public Employee(
+            @NotNull String firstName,
+            @NotNull String lastName,
+            @NotNull String gender,
+            @NotNull LocalDate birthday,
+            String city,
+            Set<Project> projects
+    ) {
+        this(firstName, lastName, gender, birthday, city);
+        this.projects = projects;
     }
 
     public Long getId() {
@@ -90,6 +110,32 @@ public class Employee {
         this.city = city;
     }
 
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(id, employee.id) &&
+                Objects.equals(firstName, employee.firstName) &&
+                Objects.equals(lastName, employee.lastName) &&
+                Objects.equals(gender, employee.gender) &&
+                Objects.equals(birthday, employee.birthday) &&
+                Objects.equals(city, employee.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, gender, birthday, city);
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -100,23 +146,5 @@ public class Employee {
                 ", birthday=" + birthday +
                 ", city='" + city + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Employee)) return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(id, employee.id) &&
-                firstName.equals(employee.firstName) &&
-                lastName.equals(employee.lastName) &&
-                gender.equals(employee.gender) &&
-                birthday.equals(employee.birthday) &&
-                Objects.equals(city, employee.city);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, gender, birthday, city);
     }
 }

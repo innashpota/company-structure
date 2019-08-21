@@ -2,12 +2,17 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {EmployeesComponent} from './employees/employees.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {ProjectComponent} from './project/project.component';
 
 
 const routes: Routes = [
   {
     path: 'employees',
     component: EmployeesComponent
+  },
+  {
+    path: 'projects',
+    component: ProjectComponent
   },
   {
     path: '',

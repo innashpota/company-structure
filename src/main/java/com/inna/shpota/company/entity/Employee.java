@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Objects;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -99,5 +100,23 @@ public class Employee {
                 ", birthday=" + birthday +
                 ", city='" + city + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(id, employee.id) &&
+                firstName.equals(employee.firstName) &&
+                lastName.equals(employee.lastName) &&
+                gender.equals(employee.gender) &&
+                birthday.equals(employee.birthday) &&
+                Objects.equals(city, employee.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, gender, birthday, city);
     }
 }

@@ -11,12 +11,12 @@ public class EmployeeController {
     private final EmployeeService service;
 
     public EmployeeController(EmployeeService service) {
-        Assert.notNull(service, "service must not be null");
+        Assert.notNull(service, "Service must not be null");
         this.service = service;
     }
 
     @PostMapping
-    public void addStop(@RequestBody Employee employee) {
+    public void add(@RequestBody Employee employee) {
         service.add(employee);
     }
 
@@ -26,12 +26,12 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") Long id) {
-        service.deleteById(id);
+    public void delete(@PathVariable("id") Long id) {
+        service.delete(id);
     }
 
     @GetMapping
-    public Iterable<Employee> showEmployees() {
+    public Iterable<Employee> showAll() {
         return service.showAll();
     }
 }

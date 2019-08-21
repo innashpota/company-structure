@@ -1,4 +1,7 @@
-Company Structure [![Build Status](https://travis-ci.com/shpotainna/company-structure.svg?branch=master)](https://travis-ci.com/shpotainna/company-structure)
+[![Build Status](https://travis-ci.com/shpotainna/company-structure.svg?branch=master)](https://travis-ci.com/shpotainna/company-structure)
+[![codecov](https://codecov.io/gh/shpotainna/company-structure/branch/master/graph/badge.svg)](https://codecov.io/gh/shpotainna/company-structure)
+
+Company Structure 
 =================
 
 A simple CDUD application representing a company structure.

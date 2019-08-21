@@ -22,7 +22,7 @@ public class EmployeeService {
         repository.save(updated);
     }
 
-    public void deleteById(Long id) {
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 

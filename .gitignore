@@ -60,7 +60,6 @@ out/
 ### Angular ###
 webapp/e2e/
 webapp/*.iml
-webapp/package-lock.json
 # dependencies
 webapp/node_modules
 # compiled output

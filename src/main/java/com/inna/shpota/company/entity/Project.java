@@ -35,16 +35,6 @@ public class Project {
         this.endDate = endDate;
     }
 
-    public Project(
-            @NotNull String name,
-            @NotNull LocalDate beginDate,
-            @NotNull LocalDate endDate,
-            Set<Employee> employees
-    ) {
-        this(name, beginDate, endDate);
-        this.employees = employees;
-    }
-
     public Long getId() {
         return id;
     }
@@ -86,20 +76,19 @@ public class Project {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Project)) return false;
-        Project project = (Project) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Project)) return false;
+        Project project = (Project) obj;
         return Objects.equals(id, project.id) &&
                 Objects.equals(name, project.name) &&
                 Objects.equals(beginDate, project.beginDate) &&
-                Objects.equals(endDate, project.endDate) &&
-                Objects.equals(employees, project.employees);
+                Objects.equals(endDate, project.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, beginDate, endDate, employees);
+        return Objects.hash(id, name, beginDate, endDate);
     }
 
     @Override

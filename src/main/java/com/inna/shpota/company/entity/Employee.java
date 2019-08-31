@@ -1,5 +1,7 @@
 package com.inna.shpota.company.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -7,6 +9,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import static java.util.stream.Collectors.toList;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.AUTO;
 
@@ -26,6 +29,7 @@ public class Employee {
     private String city;
 
     @ManyToMany(cascade = ALL)
+    @JsonIgnore
     @JoinTable(
             name = "employee_project",
             joinColumns = @JoinColumn(name = "employee_id"),
@@ -48,18 +52,6 @@ public class Employee {
         this.gender = gender;
         this.birthday = birthday;
         this.city = city;
-    }
-
-    public Employee(
-            @NotNull String firstName,
-            @NotNull String lastName,
-            @NotNull String gender,
-            @NotNull LocalDate birthday,
-            String city,
-            Set<Project> projects
-    ) {
-        this(firstName, lastName, gender, birthday, city);
-        this.projects = projects;
     }
 
     public Long getId() {
@@ -119,10 +111,10 @@ public class Employee {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Employee)) return false;
-        Employee employee = (Employee) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Employee)) return false;
+        Employee employee = (Employee) obj;
         return Objects.equals(id, employee.id) &&
                 Objects.equals(firstName, employee.firstName) &&
                 Objects.equals(lastName, employee.lastName) &&
@@ -145,6 +137,7 @@ public class Employee {
                 ", gender='" + gender + '\'' +
                 ", birthday=" + birthday +
                 ", city='" + city + '\'' +
+                ", projects=" + projects.stream().map(Project::getName).collect(toList()) + '\'' +
                 '}';
     }
 }

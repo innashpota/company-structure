@@ -53,10 +53,9 @@ export class EmployeesComponent implements OnInit, OnDestroy {
       .afterClosed()
       .subscribe(outEmployee => {
         if (outEmployee) {
-          const body = employee;
-          this.service.add(body)
-            .subscribe(employee => {
-              this.dataSource.push(employee);
+          this.service.add(employee)
+            .subscribe((outEmpl: Employee) => {
+              this.dataSource.push(outEmpl);
               this.refreshTable();
             });
         }
@@ -64,7 +63,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   openEditDialog(employee: Employee): void {
-    let currentEmployee = new Employee();
+    const currentEmployee = new Employee();
     currentEmployee.id = employee.id;
     currentEmployee.firstName = employee.firstName;
     currentEmployee.lastName = employee.lastName;
@@ -76,10 +75,9 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(outEmployee => {
       if (outEmployee) {
-        const body = outEmployee;
-        this.service.edit(body)
-          .subscribe(data => {
-            this.dataSource.push(data);
+        this.service.edit(outEmployee)
+          .subscribe((outEmpl: Employee) => {
+            this.dataSource.push(outEmpl);
             this.refreshTable();
           });
       }

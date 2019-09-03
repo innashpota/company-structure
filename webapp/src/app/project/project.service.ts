@@ -33,6 +33,43 @@ export class ProjectService {
       );
   }
 
+  addEmployee(projectId: number, employeeId: number): Observable<Project> {
+    return this.http.post<Project>(
+      `${environment.url}/projects/${projectId}/employees/${employeeId}`,
+      {},
+      {headers: this.headers})
+      .pipe(catchError(this.handleError));
+  }
+
+  editEmployee(projectId: number, oldEmployeeId: number, newEmployeeId: number): Observable<Project> {
+    return this.http.put<Project>(
+      `${environment.url}/projects/${projectId}/employees`,
+      {
+        'oldEmployeeId': oldEmployeeId,
+        'newEmployeeId': newEmployeeId
+      },
+      {headers: this.headers})
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteEmployee(projectId: number, employeeId: number): Observable<void> {
+    return this.http.delete<void>(`${environment.url}/projects/${projectId}/employees/${employeeId}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  editProjectName(id: number, name: string): Observable<Project> {
+    return this.http.put<Project>(
+      `${environment.url}/projects/${id}`,
+      {'name': name},
+      {headers: this.headers})
+      .pipe(catchError(this.handleError));
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.url}/projects/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);

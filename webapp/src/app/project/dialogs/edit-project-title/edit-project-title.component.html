@@ -1,0 +1,31 @@
+<div class="container">
+  <h3 mat-dialog-title>Edit project name</h3>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput
+               class="form-control"
+               placeholder="Project name"
+               [(ngModel)]="name"
+               name="name"
+               required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions class="button-row">
+      <button mat-button
+              [disabled]="!formControl.valid"
+              [mat-dialog-close]="name"
+              cdkFocusInitial>
+        Save
+      </button>
+      <button mat-button
+              (click)="onNoClick()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

@@ -13,6 +13,10 @@ import {AddEmployeeComponent} from './employees/dialogs/add-employee/add-employe
 import {EditEmployeeComponent} from './employees/dialogs/edit-employee/edit-employee.component';
 import {ProjectComponent} from './project/project.component';
 import {ProjectService} from './project/project.service';
+import {AddProjectComponent} from './project/dialogs/add-project/add-project.component';
+import {EditProjectTitleComponent} from './project/dialogs/edit-project-title/edit-project-title.component';
+import {AddEmployeeToProjectComponent} from './project/dialogs/add-employee-to-project/add-employee-to-project.component';
+import {EditEmployeeInProjectComponent} from './project/dialogs/edit-employee-in-project/edit-employee-in-project.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import {ProjectService} from './project/project.service';
     PageNotFoundComponent,
     AddEmployeeComponent,
     EditEmployeeComponent,
-    ProjectComponent
+    ProjectComponent,
+    AddProjectComponent,
+    EditProjectTitleComponent,
+    AddEmployeeToProjectComponent,
+    EditEmployeeInProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +44,11 @@ import {ProjectService} from './project/project.service';
   ],
   entryComponents: [
     AddEmployeeComponent,
-    EditEmployeeComponent
+    EditEmployeeComponent,
+    AddProjectComponent,
+    EditProjectTitleComponent,
+    AddEmployeeToProjectComponent,
+    EditEmployeeInProjectComponent
   ],
   bootstrap: [
     AppComponent

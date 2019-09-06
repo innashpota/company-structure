@@ -1,0 +1,57 @@
+<div class="container">
+  <h3 mat-dialog-title> Add project </h3>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput
+               class="form-control"
+               placeholder="Name"
+               [(ngModel)]="project.name"
+               name="name"
+               required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput
+               class="form-control"
+               placeholder="Begin date"
+               [matDatepicker]="beginDate"
+               [(ngModel)]="project.beginDate"
+               name="createDate">
+        <mat-datepicker-toggle matSuffix [for]="beginDate"></mat-datepicker-toggle>
+        <mat-datepicker #beginDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput
+               class="form-control"
+               placeholder="End date"
+               [matDatepicker]="endDate"
+               [(ngModel)]="project.endDate"
+               name="createDate">
+        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions class="button-row">
+      <button mat-button
+              [disabled]="!formControl.valid"
+              [mat-dialog-close]="project"
+              cdkFocusInitial>
+        Save
+      </button>
+      <button mat-button
+              (click)="onNoClick()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

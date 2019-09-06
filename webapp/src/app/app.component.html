@@ -1,1 +1,24 @@
-<router-outlet></router-outlet>
+<mat-toolbar class="toolbar" color="primary">
+  <button mat-icon-button (click)="menu.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <button mat-button routerLink="/"> {{title}} </button>
+</mat-toolbar>
+
+<mat-sidenav-container [style.marginTop.px]="mobileQuery.matches ? 60 : 0">
+  <mat-sidenav #menu
+               fixedTopGap="60"
+               [fixedInViewport]="mobileQuery.matches"
+               [mode]="mobileQuery.matches ? 'over' : 'side'">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/employees"> Employees </a>
+      <a mat-list-item routerLink="/projects"> Projects </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+

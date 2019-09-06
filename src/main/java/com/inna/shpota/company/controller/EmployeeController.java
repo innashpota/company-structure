@@ -31,7 +31,7 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public Iterable<Employee> showAll() {
-        return service.showAll();
+    public Iterable<Employee> findAll() {
+        return service.findAll();
     }
 }

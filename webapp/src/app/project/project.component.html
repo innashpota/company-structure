@@ -1,0 +1,84 @@
+<mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+<ng-container *ngIf="!isLoadingResults">
+  <mat-toolbar>
+    <div class="button-row">
+      <span class="fill-remaining-space"></span>
+      <button mat-button (click)="openAddProjectDialog()">
+        <mat-icon>add</mat-icon>
+        Add project
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-nav-list>
+          <mat-list-item>
+            <a matLine>{{element.name}}</a>
+            <button mat-button [matMenuTriggerFor]="projectMenu" matTooltip="Project menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #projectMenu="matMenu">
+              <button mat-menu-item (click)="openEditTitleDialog(element.id, element.name)"> Edit title</button>
+              <button mat-menu-item
+                      (click)="deleteRow(element.id)"
+                      [disabled]="isEmptyEmployees(element)">
+                Delete project
+              </button>
+            </mat-menu>
+          </mat-list-item>
+        </mat-nav-list>
+      </td>
+    </ng-container>
+
+    <!-- Begin date Column -->
+    <ng-container matColumnDef="beginDate">
+      <th mat-header-cell *matHeaderCellDef> Begin date</th>
+      <td mat-cell *matCellDef="let element"> {{element.beginDate}} </td>
+    </ng-container>
+
+    <!-- End date Column -->
+    <ng-container matColumnDef="endDate">
+      <th mat-header-cell *matHeaderCellDef> End date</th>
+      <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+    </ng-container>
+
+    <!-- Employees count Column -->
+    <ng-container matColumnDef="employeesCount">
+      <th mat-header-cell *matHeaderCellDef> Employees count</th>
+      <td mat-cell *matCellDef="let element"> {{getEmployeesCount(element)}} </td>
+    </ng-container>
+
+    <!-- Employees Column -->
+    <ng-container matColumnDef="employees">
+      <th mat-header-cell *matHeaderCellDef> Employees</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-nav-list dense>
+          <mat-list-item *ngFor="let employee of element.employees">
+            <a matLine>{{ employee.firstName}} {{employee.lastName}}</a>
+            <button mat-button [matMenuTriggerFor]="employeeMenu" matTooltip="Project employees menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #employeeMenu="matMenu">
+              <button mat-menu-item (click)="openChangeEmployeeDialog(element, employee)"> Change employee</button>
+              <button mat-menu-item (click)="deleteEmployee(element.id, employee.id)"> Delete employee</button>
+            </mat-menu>
+          </mat-list-item>
+          <mat-list-item>
+            <a matLine></a>
+            <button mat-button matTooltip="Add employee to project"
+                    (click)="openAddEmployeeDialog(element)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-nav-list>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</ng-container>

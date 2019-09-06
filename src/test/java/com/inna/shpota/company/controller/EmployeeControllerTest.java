@@ -57,7 +57,7 @@ public class EmployeeControllerTest {
     @Test
     public void shouldEdit() throws Exception {
         List<Employee> employees = getEmployees();
-        given(service.showAll()).willReturn(employees);
+        given(service.findAll()).willReturn(employees);
         var employee = getEmployeeWithId();
 
         mockMvc.perform(
@@ -79,7 +79,7 @@ public class EmployeeControllerTest {
     @Test
     public void shouldDelete() throws Exception {
         List<Employee> employees = getEmployees();
-        given(service.showAll()).willReturn(employees);
+        given(service.findAll()).willReturn(employees);
 
         mockMvc.perform(
                 delete("/employees/{id}", 1L)
@@ -90,9 +90,9 @@ public class EmployeeControllerTest {
     }
 
     @Test
-    public void shouldShowAll() throws Exception {
+    public void shouldFindAll() throws Exception {
         List<Employee> employees = getEmployees();
-        given(service.showAll()).willReturn(employees);
+        given(service.findAll()).willReturn(employees);
 
         mockMvc.perform(
                 get("/employees")
@@ -111,7 +111,7 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$.[1].birthday").value("1954-06-12"))
                 .andExpect(jsonPath("$.[1].city").value("Texas"))
                 .andReturn();
-        verify(service).showAll();
+        verify(service).findAll();
         verifyNoMoreInteractions(service);
     }
 

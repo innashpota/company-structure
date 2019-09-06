@@ -18,15 +18,15 @@ public class EmployeeService {
         repository.save(employee);
     }
 
-    public void edit(Long id, Employee updated) {
-        repository.save(updated);
+    public void edit(Long id, Employee employee) {
+        repository.save(employee);
     }
 
     public void delete(Long id) {
         repository.deleteById(id);
     }
 
-    public Iterable<Employee> showAll() {
+    public Iterable<Employee> findAll() {
         return repository.findAll();
     }
 }

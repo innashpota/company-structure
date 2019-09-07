@@ -27,7 +27,7 @@ public class ProjectService {
     }
 
     public Iterable<Project> findAll() {
-        return projectRepository.findAll();
+        return projectRepository.findAllByOrderByIdAsc();
     }
 
     @Transactional

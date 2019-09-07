@@ -1,19 +1,21 @@
 package com.inna.shpota.company.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
-import static java.util.stream.Collectors.toList;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.AUTO;
 
+@Data
 @Entity
+@NoArgsConstructor
 @Table(name = "employees")
 public class Employee {
     @Id
@@ -36,108 +38,4 @@ public class Employee {
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
     private Set<Project> projects = new HashSet<>();
-
-    public Employee() {
-    }
-
-    public Employee(
-            @NotNull String firstName,
-            @NotNull String lastName,
-            @NotNull String gender,
-            @NotNull LocalDate birthday,
-            String city
-    ) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.birthday = birthday;
-        this.city = city;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public Set<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Employee)) return false;
-        Employee employee = (Employee) obj;
-        return Objects.equals(id, employee.id) &&
-                Objects.equals(firstName, employee.firstName) &&
-                Objects.equals(lastName, employee.lastName) &&
-                Objects.equals(gender, employee.gender) &&
-                Objects.equals(birthday, employee.birthday) &&
-                Objects.equals(city, employee.city);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, gender, birthday, city);
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", birthday=" + birthday +
-                ", city='" + city + '\'' +
-                ", projects=" + projects.stream().map(Project::getName).collect(toList()) + '\'' +
-                '}';
-    }
 }

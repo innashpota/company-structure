@@ -11,7 +11,6 @@ import {Employee} from '../../../employees/employee';
   styleUrls: ['./add-employee-to-project.component.css']
 })
 export class AddEmployeeToProjectComponent implements OnInit, OnDestroy {
-  projectName: string;
   employees: Employee[] = [];
   formControl = new FormControl('', [Validators.required]);
   private subscription: Subscription = null;
@@ -19,9 +18,8 @@ export class AddEmployeeToProjectComponent implements OnInit, OnDestroy {
   constructor(
     private employeeService: EmployeeService,
     public dialogRef: MatDialogRef<AddEmployeeToProjectComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { projectName: string }
+    @Inject(MAT_DIALOG_DATA) public data: string
   ) {
-    this.projectName = data.projectName;
   }
 
   ngOnInit(): void {

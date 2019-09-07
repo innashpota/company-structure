@@ -47,7 +47,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   openAddDialog(): void {
     const employee = new Employee();
     const dialogRef = this.dialog.open(AddEmployeeComponent, {
-      data: {employee: employee}
+      data: employee
     });
     dialogRef.afterClosed().subscribe(
       outEmployee => {
@@ -70,7 +70,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     currentEmployee.birthday = employee.birthday;
     currentEmployee.city = employee.city;
     const dialogRef = this.dialog.open(EditEmployeeComponent, {
-      data: {employee: currentEmployee}
+      data: currentEmployee
     });
     dialogRef.afterClosed().subscribe(
       outEmployee => {

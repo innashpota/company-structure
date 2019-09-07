@@ -57,13 +57,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
   openAddProjectDialog(): void {
     const project = new Project();
     const dialogRef = this.dialog.open(AddProjectComponent, {
-      data: {project: project}
+      data: project
     });
     dialogRef.afterClosed().subscribe(
       outProject => {
         if (outProject) {
-          const body = project;
-          this.service.add(body).subscribe(
+          this.service.add(project).subscribe(
             proj => {
               this.dataSource.push(proj);
               this.refreshTable();
@@ -75,7 +74,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   openEditTitleDialog(id: number, name: any): void {
     const currentName = name;
     const dialogRef = this.dialog.open(EditProjectTitleComponent, {
-      data: {name: currentName}
+      data: currentName
     });
     dialogRef.afterClosed().subscribe(
       outName => {
@@ -97,7 +96,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   openAddEmployeeDialog(project: Project) {
     const dialogRef = this.dialog.open(AddEmployeeToProjectComponent, {
-      data: {projectName: project.name}
+      data: project.name
     });
     dialogRef.afterClosed().subscribe(
       outEmployee => {

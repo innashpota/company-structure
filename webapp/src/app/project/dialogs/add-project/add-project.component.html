@@ -8,7 +8,7 @@
         <input matInput
                class="form-control"
                placeholder="Name"
-               [(ngModel)]="project.name"
+               [(ngModel)]="data.name"
                name="name"
                required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
@@ -22,7 +22,7 @@
                class="form-control"
                placeholder="Begin date"
                [matDatepicker]="beginDate"
-               [(ngModel)]="project.beginDate"
+               [(ngModel)]="data.beginDate"
                name="createDate">
         <mat-datepicker-toggle matSuffix [for]="beginDate"></mat-datepicker-toggle>
         <mat-datepicker #beginDate></mat-datepicker>
@@ -36,7 +36,7 @@
                class="form-control"
                placeholder="End date"
                [matDatepicker]="endDate"
-               [(ngModel)]="project.endDate"
+               [(ngModel)]="data.endDate"
                name="createDate">
         <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
         <mat-datepicker #endDate></mat-datepicker>
@@ -46,7 +46,7 @@
     <div mat-dialog-actions class="button-row">
       <button mat-button
               [disabled]="!formControl.valid"
-              [mat-dialog-close]="project"
+              [mat-dialog-close]="data"
               cdkFocusInitial>
         Save
       </button>

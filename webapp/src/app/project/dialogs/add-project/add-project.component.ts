@@ -9,14 +9,12 @@ import {Project} from '../../project';
   styleUrls: ['./add-project.component.css']
 })
 export class AddProjectComponent {
-  project: Project = null;
   formControl = new FormControl('', [Validators.required]);
 
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { project: Project }
+    @Inject(MAT_DIALOG_DATA) public data: Project
   ) {
-    this.project = data.project;
   }
 
   getErrorMessage() {

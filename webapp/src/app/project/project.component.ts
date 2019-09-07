@@ -59,14 +59,13 @@ export class ProjectComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(AddProjectComponent, {
       data: {project: project}
     });
-    dialogRef
-      .afterClosed()
-      .subscribe(outProject => {
+    dialogRef.afterClosed().subscribe(
+      outProject => {
         if (outProject) {
           const body = project;
-          this.service.add(body)
-            .subscribe((outProj: Project) => {
-              this.dataSource.push(outProj);
+          this.service.add(body).subscribe(
+            proj => {
+              this.dataSource.push(proj);
               this.refreshTable();
             });
         }
@@ -78,32 +77,34 @@ export class ProjectComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(EditProjectTitleComponent, {
       data: {name: currentName}
     });
-    dialogRef.afterClosed().subscribe((outName: string) => {
-      if (outName && outName !== currentName) {
-        this.service.editProjectName(id, outName)
-          .subscribe((outProject: Project) => {
-            this.dataSource.push(outProject);
-            this.refreshTable();
-          });
-      }
-    });
+    dialogRef.afterClosed().subscribe(
+      outName => {
+        if (outName && outName !== currentName) {
+          this.service.editProjectName(id, outName).subscribe(
+            proj => {
+              this.dataSource.push(proj);
+              this.refreshTable();
+            });
+        }
+      });
   }
 
   deleteRow(id: number): void {
-    this.service.delete(id).subscribe(() => this.refreshTable());
+    this.service.delete(id).subscribe(
+      () => this.refreshTable()
+    );
   }
 
   openAddEmployeeDialog(project: Project) {
     const dialogRef = this.dialog.open(AddEmployeeToProjectComponent, {
       data: {projectName: project.name}
     });
-    dialogRef
-      .afterClosed()
-      .subscribe((outEmployee: Employee) => {
+    dialogRef.afterClosed().subscribe(
+      outEmployee => {
         if (outEmployee) {
-          this.service.addEmployee(project.id, outEmployee.id)
-            .subscribe((outProj: Project) => {
-              this.dataSource.push(outProj);
+          this.service.addEmployee(project.id, outEmployee.id).subscribe(
+            proj => {
+              this.dataSource.push(proj);
               this.refreshTable();
             });
         }
@@ -118,18 +119,21 @@ export class ProjectComponent implements OnInit, OnDestroy {
         employeeId: currentEmployeeId
       }
     });
-    dialogRef.afterClosed().subscribe((outEmployeeId: number) => {
-      if (outEmployeeId && outEmployeeId !== currentEmployeeId) {
-        this.service.editEmployee(project.id, currentEmployeeId, outEmployeeId)
-          .subscribe((outProject: Project) => {
-            this.dataSource.push(outProject);
-            this.refreshTable();
-          });
-      }
-    });
+    dialogRef.afterClosed().subscribe(
+      outEmployeeId => {
+        if (outEmployeeId && outEmployeeId !== currentEmployeeId) {
+          this.service.editEmployee(project.id, currentEmployeeId, outEmployeeId).subscribe(
+            proj => {
+              this.dataSource.push(proj);
+              this.refreshTable();
+            });
+        }
+      });
   }
 
   deleteEmployee(projectId: number, employeeId: number): void {
-    this.service.deleteEmployee(projectId, employeeId).subscribe(() => this.refreshTable());
+    this.service.deleteEmployee(projectId, employeeId).subscribe(
+      () => this.refreshTable()
+    );
   }
 }

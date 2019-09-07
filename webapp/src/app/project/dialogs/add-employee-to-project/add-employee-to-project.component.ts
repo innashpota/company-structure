@@ -25,19 +25,15 @@ export class AddEmployeeToProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.employeeService.getAll().subscribe((employees: Employee[]) => {
-      this.employees = employees;
-    });
+    this.subscription = this.employeeService.getAll().subscribe(
+      employees => this.employees = employees
+    );
   }
 
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
-
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? 'Required field' : '';
   }
 
   onNoClick(): void {

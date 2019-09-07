@@ -49,13 +49,12 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(AddEmployeeComponent, {
       data: {employee: employee}
     });
-    dialogRef
-      .afterClosed()
-      .subscribe(outEmployee => {
+    dialogRef.afterClosed().subscribe(
+      outEmployee => {
         if (outEmployee) {
-          this.service.add(employee)
-            .subscribe((outEmpl: Employee) => {
-              this.dataSource.push(outEmpl);
+          this.service.add(employee).subscribe(
+            empl => {
+              this.dataSource.push(empl);
               this.refreshTable();
             });
         }
@@ -73,18 +72,21 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(EditEmployeeComponent, {
       data: {employee: currentEmployee}
     });
-    dialogRef.afterClosed().subscribe(outEmployee => {
-      if (outEmployee) {
-        this.service.edit(outEmployee)
-          .subscribe((outEmpl: Employee) => {
-            this.dataSource.push(outEmpl);
-            this.refreshTable();
-          });
-      }
-    });
+    dialogRef.afterClosed().subscribe(
+      outEmployee => {
+        if (outEmployee) {
+          this.service.edit(outEmployee).subscribe(
+            empl => {
+              this.dataSource.push(empl);
+              this.refreshTable();
+            });
+        }
+      });
   }
 
   deleteRow(employee: Employee): void {
-    this.service.delete(employee.id).subscribe(() => this.refreshTable());
+    this.service.delete(employee.id).subscribe(
+      () => this.refreshTable()
+    );
   }
 }

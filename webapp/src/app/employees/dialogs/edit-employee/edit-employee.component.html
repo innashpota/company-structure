@@ -8,7 +8,7 @@
         <input matInput
                class="form-control"
                placeholder="First name"
-               [(ngModel)]="employee.firstName"
+               [(ngModel)]="data.firstName"
                name="firstName"
                required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
@@ -20,7 +20,7 @@
         <input matInput
                class="form-control"
                placeholder="Last name"
-               [(ngModel)]="employee.lastName"
+               [(ngModel)]="data.lastName"
                name="lastName"
                required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
@@ -31,7 +31,7 @@
       <mat-form-field>
         <mat-select class="form-control"
                     placeholder="Gender"
-                    [(ngModel)]="employee.gender"
+                    [(ngModel)]="data.gender"
                     name="gender"
                     required>
           <mat-option *ngFor="let gender of genders" [value]="gender">{{gender}}</mat-option>
@@ -45,7 +45,7 @@
         <input matInput
                class="form-control"
                placeholder="Birthday"
-               [(ngModel)]="employee.birthday"
+               [(ngModel)]="data.birthday"
                name="birthday"
                required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
@@ -57,7 +57,7 @@
         <input matInput
                class="form-control"
                placeholder="City"
-               [(ngModel)]="employee.city"
+               [(ngModel)]="data.city"
                name="city">
       </mat-form-field>
     </div>
@@ -65,7 +65,7 @@
     <div mat-dialog-actions class="button-row">
       <button mat-button
               [disabled]="!formControl.valid"
-              [mat-dialog-close]="employee"
+              [mat-dialog-close]="data"
               cdkFocusInitial>
         Save
       </button>

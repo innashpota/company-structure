@@ -14,7 +14,6 @@ export class EditEmployeeInProjectComponent implements OnInit, OnDestroy {
   employeeId: number;
   employees: Employee[] = [];
   private subscription: Subscription = null;
-  employeeFullName: string;
 
   constructor(
     private employeeService: EmployeeService,
@@ -29,9 +28,9 @@ export class EditEmployeeInProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.employeeService.getAll().subscribe((employees: Employee[]) => {
-      this.employees = employees;
-    });
+    this.subscription = this.employeeService.getAll().subscribe(
+      employees => this.employees = employees
+    );
   }
 
   ngOnDestroy(): void {

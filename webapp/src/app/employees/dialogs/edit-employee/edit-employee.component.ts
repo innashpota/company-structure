@@ -10,15 +10,13 @@ import {Employee} from '../../employee';
   styleUrls: ['./edit-employee.component.css']
 })
 export class EditEmployeeComponent {
-  employee: Employee = null;
   formControl = new FormControl('', [Validators.required]);
   readonly genders: string[] = ['M', 'F', 'Other'];
 
   constructor(
     public dialogRef: MatDialogRef<EditEmployeeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { employee: Employee }
+    @Inject(MAT_DIALOG_DATA) public data: Employee
   ) {
-    this.employee = data.employee;
   }
 
   getErrorMessage() {

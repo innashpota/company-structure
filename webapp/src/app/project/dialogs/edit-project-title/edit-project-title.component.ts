@@ -8,14 +8,12 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./edit-project-title.component.css']
 })
 export class EditProjectTitleComponent {
-  name: string;
   formControl = new FormControl('', [Validators.required]);
 
   constructor(
     public dialogRef: MatDialogRef<EditProjectTitleComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { name: string }
+    @Inject(MAT_DIALOG_DATA) public data: string
   ) {
-    this.name = data.name;
   }
 
   getErrorMessage() {

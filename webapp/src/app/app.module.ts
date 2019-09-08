@@ -11,13 +11,13 @@ import {EmployeesComponent} from './employees/employees.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {AddEmployeeComponent} from './employees/dialogs/add-employee/add-employee.component';
 import {EditEmployeeComponent} from './employees/dialogs/edit-employee/edit-employee.component';
-import {ProjectComponent} from './project/project.component';
-import {ProjectService} from './project/project.service';
-import {AddProjectComponent} from './project/dialogs/add-project/add-project.component';
-import {EditProjectTitleComponent} from './project/dialogs/edit-project-title/edit-project-title.component';
-import {AddEmployeeToProjectComponent} from './project/dialogs/add-employee-to-project/add-employee-to-project.component';
-import {EditEmployeeInProjectComponent} from './project/dialogs/edit-employee-in-project/edit-employee-in-project.component';
-import {DeleteProjectComponent} from './project/dialogs/delete-project/delete-project.component';
+import {ProjectComponent} from './projects/project.component';
+import {ProjectService} from './projects/project.service';
+import {AddProjectComponent} from './projects/dialogs/add-project/add-project.component';
+import {EditProjectTitleComponent} from './projects/dialogs/edit-project-title/edit-project-title.component';
+import {AddEmployeeToProjectComponent} from './projects/dialogs/add-employee-to-project/add-employee-to-project.component';
+import {EditEmployeeInProjectComponent} from './projects/dialogs/edit-employee-in-project/edit-employee-in-project.component';
+import {DeleteProjectComponent} from './projects/dialogs/delete-project/delete-project.component';
 import {DeleteEmployeeComponent} from './employees/dialogs/delete-employee/delete-employee.component';
 
 @NgModule({

@@ -43,12 +43,14 @@
     <div class="form">
       <mat-form-field>
         <input matInput
+               required
                class="form-control"
                placeholder="Birthday"
+               [matDatepicker]="birthday"
                [(ngModel)]="data.birthday"
-               name="birthday"
-               required>
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+               name="birthday">
+        <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+        <mat-datepicker #birthday></mat-datepicker>
       </mat-form-field>
     </div>
 

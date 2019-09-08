@@ -7,6 +7,7 @@ import {Employee} from './employee';
 import {EmployeeService} from './employee.service';
 import {AddEmployeeComponent} from './dialogs/add-employee/add-employee.component';
 import {EditEmployeeComponent} from './dialogs/edit-employee/edit-employee.component';
+import {DeleteEmployeeComponent} from './dialogs/delete-employee/delete-employee.component';
 
 @Component({
   selector: 'app-employees',
@@ -19,13 +20,11 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['firstName', 'lastName', 'gender', 'birthday', 'city', 'action'];
   private subscription: Subscription = null;
 
-
   constructor(
-    private http: HttpClient,
     public dialog: MatDialog,
+    private http: HttpClient,
     private service: EmployeeService
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.refreshTable();
@@ -38,7 +37,8 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   refreshTable(): void {
-    this.subscription = this.service.getAll().subscribe(data => {
+    this.subscription = this.service.getAll().subscribe(
+      data => {
       this.isLoadingResults = false;
       this.dataSource = data;
     });
@@ -84,9 +84,17 @@ export class EmployeesComponent implements OnInit, OnDestroy {
       });
   }
 
-  deleteRow(employee: Employee): void {
-    this.service.delete(employee.id).subscribe(
-      () => this.refreshTable()
-    );
+  deleteEmployee(employee: Employee): void {
+    const dialogRef = this.dialog.open(DeleteEmployeeComponent, {
+      data: employee.firstName + ' ' + employee.lastName
+    });
+    dialogRef.afterClosed().subscribe(
+      isYes => {
+        if (isYes) {
+          this.service.delete(employee.id).subscribe(
+            () => this.refreshTable()
+          );
+        }
+      });
   }
 }

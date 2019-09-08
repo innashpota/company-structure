@@ -7,6 +7,5 @@ export class Project {
   public endDate: Date;
   public employees: Employee[];
 
-  constructor() {
-  }
+  constructor() { }
 }

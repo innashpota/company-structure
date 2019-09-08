@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {environment} from '../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
+
 import {Project} from './project';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,7 @@ import {Project} from './project';
 export class ProjectService {
   readonly headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  public constructor(public http: HttpClient) {
-  }
+  public constructor(public http: HttpClient) { }
 
   add(project: Project): Observable<Project> {
     return this.http.post<Project>(

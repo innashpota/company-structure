@@ -6,6 +6,5 @@ export class Employee {
   public birthday: Date;
   public city: string;
 
-  public constructor() {
-  }
+  public constructor() { }
 }

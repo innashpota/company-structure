@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {MatDialog} from '@angular/material';
+
 import {Project} from './project';
 import {ProjectService} from './project.service';
 import {AddProjectComponent} from './dialogs/add-project/add-project.component';
@@ -9,6 +10,7 @@ import {EditProjectTitleComponent} from './dialogs/edit-project-title/edit-proje
 import {AddEmployeeToProjectComponent} from './dialogs/add-employee-to-project/add-employee-to-project.component';
 import {Employee} from '../employees/employee';
 import {EditEmployeeInProjectComponent} from './dialogs/edit-employee-in-project/edit-employee-in-project.component';
+import {DeleteProjectComponent} from './dialogs/delete-project/delete-project.component';
 
 @Component({
   selector: 'app-project',
@@ -21,13 +23,11 @@ export class ProjectComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['name', 'beginDate', 'endDate', 'employeesCount', 'employees'];
   private subscription: Subscription = null;
 
-
   constructor(
-    private http: HttpClient,
     public dialog: MatDialog,
+    private http: HttpClient,
     private service: ProjectService
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.refreshTable();
@@ -40,7 +40,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   refreshTable(): void {
-    this.subscription = this.service.getAll().subscribe(data => {
+    this.subscription = this.service.getAll().subscribe(
+      data => {
       this.isLoadingResults = false;
       this.dataSource = data;
     });
@@ -88,10 +89,18 @@ export class ProjectComponent implements OnInit, OnDestroy {
       });
   }
 
-  deleteRow(id: number): void {
-    this.service.delete(id).subscribe(
-      () => this.refreshTable()
-    );
+  deleteProject(id: number, name: string): void {
+    const dialogRef = this.dialog.open(DeleteProjectComponent, {
+      data: name
+    });
+    dialogRef.afterClosed().subscribe(
+      isYes => {
+        if (isYes) {
+          this.service.delete(id).subscribe(
+            () => this.refreshTable()
+          );
+        }
+      });
   }
 
   openAddEmployeeDialog(project: Project) {

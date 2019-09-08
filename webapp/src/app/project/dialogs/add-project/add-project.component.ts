@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
 import {Project} from '../../project';
 
 @Component({
@@ -14,8 +15,7 @@ export class AddProjectComponent {
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Project
-  ) {
-  }
+  ) { }
 
   getErrorMessage() {
     return this.formControl.hasError('required') ? 'Required field' : '';

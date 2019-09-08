@@ -27,6 +27,6 @@ public class EmployeeService {
     }
 
     public Iterable<Employee> findAll() {
-        return repository.findAll();
+        return repository.findAllByOrderByIdAsc();
     }
 }

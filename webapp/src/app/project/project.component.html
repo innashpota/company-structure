@@ -24,7 +24,7 @@
             <mat-menu #projectMenu="matMenu">
               <button mat-menu-item (click)="openEditTitleDialog(element.id, element.name)"> Edit title</button>
               <button mat-menu-item
-                      (click)="deleteRow(element.id)"
+                      (click)="deleteProject(element.id, element.name)"
                       [disabled]="isEmptyEmployees(element)">
                 Delete project
               </button>

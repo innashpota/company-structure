@@ -17,6 +17,8 @@ import {AddProjectComponent} from './project/dialogs/add-project/add-project.com
 import {EditProjectTitleComponent} from './project/dialogs/edit-project-title/edit-project-title.component';
 import {AddEmployeeToProjectComponent} from './project/dialogs/add-employee-to-project/add-employee-to-project.component';
 import {EditEmployeeInProjectComponent} from './project/dialogs/edit-employee-in-project/edit-employee-in-project.component';
+import {DeleteProjectComponent} from './project/dialogs/delete-project/delete-project.component';
+import {DeleteEmployeeComponent} from './employees/dialogs/delete-employee/delete-employee.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import {EditEmployeeInProjectComponent} from './project/dialogs/edit-employee-in
     AddProjectComponent,
     EditProjectTitleComponent,
     AddEmployeeToProjectComponent,
-    EditEmployeeInProjectComponent
+    EditEmployeeInProjectComponent,
+    DeleteProjectComponent,
+    DeleteEmployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -48,11 +52,12 @@ import {EditEmployeeInProjectComponent} from './project/dialogs/edit-employee-in
     AddProjectComponent,
     EditProjectTitleComponent,
     AddEmployeeToProjectComponent,
-    EditEmployeeInProjectComponent
+    EditEmployeeInProjectComponent,
+    DeleteProjectComponent,
+    DeleteEmployeeComponent
   ],
   bootstrap: [
     AppComponent
   ]
 })
-export class AppModule {
-}
+export class AppModule { }

@@ -13,8 +13,7 @@ export class EditProjectTitleComponent {
   constructor(
     public dialogRef: MatDialogRef<EditProjectTitleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string
-  ) {
-  }
+  ) { }
 
   getErrorMessage() {
     return this.formControl.hasError('required') ? 'Required field' : '';

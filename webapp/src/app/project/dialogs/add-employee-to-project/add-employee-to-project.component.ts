@@ -1,8 +1,9 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {EmployeeService} from '../../../employees/employee.service';
 import {Subscription} from 'rxjs';
+
+import {EmployeeService} from '../../../employees/employee.service';
 import {Employee} from '../../../employees/employee';
 
 @Component({
@@ -19,8 +20,7 @@ export class AddEmployeeToProjectComponent implements OnInit, OnDestroy {
     private employeeService: EmployeeService,
     public dialogRef: MatDialogRef<AddEmployeeToProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.subscription = this.employeeService.getAll().subscribe(
@@ -29,9 +29,7 @@ export class AddEmployeeToProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscription.unsubscribe();
   }
 
   onNoClick(): void {

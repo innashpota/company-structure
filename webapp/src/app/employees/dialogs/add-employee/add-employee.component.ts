@@ -16,8 +16,7 @@ export class AddEmployeeComponent {
   constructor(
     public dialogRef: MatDialogRef<AddEmployeeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Employee
-  ) {
-  }
+  ) { }
 
   getErrorMessage() {
     return this.formControl.hasError('required') ? 'Required field' : '';

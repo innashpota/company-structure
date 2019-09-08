@@ -12,8 +12,7 @@ import {environment} from '../../environments/environment';
 export class EmployeeService {
   readonly headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  public constructor(public http: HttpClient) {
-  }
+  public constructor(public http: HttpClient) { }
 
   add(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(

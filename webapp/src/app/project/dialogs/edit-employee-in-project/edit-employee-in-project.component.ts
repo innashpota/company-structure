@@ -1,8 +1,9 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {Employee} from '../../../employees/employee';
 import {Subscription} from 'rxjs';
-import {EmployeeService} from '../../../employees/employee.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
+import {EmployeeService} from '../../../employees/employee.service';
+import {Employee} from '../../../employees/employee';
 
 @Component({
   selector: 'app-edit-employee-in-project',
@@ -34,9 +35,7 @@ export class EditEmployeeInProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscription.unsubscribe();
   }
 
   onNoClick(): void {

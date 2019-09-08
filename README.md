@@ -58,4 +58,4 @@ The application is accessible on http://localhost:4200.
 
 ## Showcase
 
-![main-window](./showcase/showcase.jpeg)
+![main-window](./showcase/showcase.gif)

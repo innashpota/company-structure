@@ -8,6 +8,8 @@ A simple CDUD application representing a company structure.
 
 The application is built using Java 11, Spring Boot 2 and PostgreSQL on the backend, Angular 8 and TypeScript on the frontend, Docker for building and running.
 
+![main-window](./showcase/showcase.gif)
+
 ## Environment Setup
 
 You need to have Docker to be able to build and run the application.
@@ -55,7 +57,3 @@ You need to have Docker to be able to build and run the application.
     ```
 
 The application is accessible on http://localhost:4200.
-
-## Showcase
-
-![main-window](./showcase/showcase.gif)

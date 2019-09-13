@@ -17,7 +17,7 @@ export class EditEmployeeInProjectComponent implements OnInit, OnDestroy {
   private subscription: Subscription = null;
 
   constructor(
-    private employeeService: EmployeeService,
+    public employeeService: EmployeeService,
     public dialogRef: MatDialogRef<EditEmployeeInProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
       projectName: string,

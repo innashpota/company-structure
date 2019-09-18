@@ -7,14 +7,8 @@ import {Router} from '@angular/router';
 
 import {EditEmployeeInProjectComponent} from './edit-employee-in-project.component';
 import {MaterialModule} from '../../../material/material.module';
-import {EmployeesComponent} from '../../../employees/employees.component';
-import {ProjectComponent} from '../../project.component';
-import {PageNotFoundComponent} from '../../../page-not-found/page-not-found.component';
-import {DeleteProjectComponent} from '../delete-project/delete-project.component';
-import {EditProjectTitleComponent} from '../edit-project-title/edit-project-title.component';
-import {AddProjectComponent} from '../add-project/add-project.component';
-import {AddEmployeeToProjectComponent} from '../add-employee-to-project/add-employee-to-project.component';
 import {ProjectService} from '../../project.service';
+import {EmployeeService} from '../../../employees/employee.service';
 
 describe('EditEmployeeInProjectComponent', () => {
   let component: EditEmployeeInProjectComponent;
@@ -36,17 +30,11 @@ describe('EditEmployeeInProjectComponent', () => {
         MaterialModule
       ],
       declarations: [
-        AddEmployeeToProjectComponent,
-        AddProjectComponent,
-        DeleteProjectComponent,
-        EditEmployeeInProjectComponent,
-        EditProjectTitleComponent,
-        EmployeesComponent,
-        ProjectComponent,
-        PageNotFoundComponent
+        EditEmployeeInProjectComponent
       ],
       providers: [
         ProjectService,
+        EmployeeService,
         {
           provide: Router,
           useValue: mockRouter

@@ -7,13 +7,6 @@ import {Router} from '@angular/router';
 
 import {EditProjectTitleComponent} from './edit-project-title.component';
 import {MaterialModule} from '../../../material/material.module';
-import {EditEmployeeInProjectComponent} from '../edit-employee-in-project/edit-employee-in-project.component';
-import {DeleteProjectComponent} from '../delete-project/delete-project.component';
-import {EmployeesComponent} from '../../../employees/employees.component';
-import {ProjectComponent} from '../../project.component';
-import {PageNotFoundComponent} from '../../../page-not-found/page-not-found.component';
-import {AddProjectComponent} from '../add-project/add-project.component';
-import {AddEmployeeToProjectComponent} from '../add-employee-to-project/add-employee-to-project.component';
 import {ProjectService} from '../../project.service';
 
 describe('EditProjectTitleComponent', () => {
@@ -32,14 +25,7 @@ describe('EditProjectTitleComponent', () => {
         MaterialModule
       ],
       declarations: [
-        AddEmployeeToProjectComponent,
-        AddProjectComponent,
-        DeleteProjectComponent,
-        EditEmployeeInProjectComponent,
-        EditProjectTitleComponent,
-        EmployeesComponent,
-        ProjectComponent,
-        PageNotFoundComponent
+        EditProjectTitleComponent
       ],
       providers: [
         ProjectService,

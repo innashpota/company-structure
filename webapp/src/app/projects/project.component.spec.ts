@@ -5,8 +5,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {ProjectComponent} from './project.component';
 import {MaterialModule} from '../material/material.module';
-import {EmployeesComponent} from '../employees/employees.component';
-import {PageNotFoundComponent} from '../page-not-found/page-not-found.component';
 import {AddEmployeeToProjectComponent} from './dialogs/add-employee-to-project/add-employee-to-project.component';
 import {AddProjectComponent} from './dialogs/add-project/add-project.component';
 import {DeleteProjectComponent} from './dialogs/delete-project/delete-project.component';
@@ -32,9 +30,7 @@ describe('ProjectComponent', () => {
         DeleteProjectComponent,
         EditEmployeeInProjectComponent,
         EditProjectTitleComponent,
-        EmployeesComponent,
-        ProjectComponent,
-        PageNotFoundComponent
+        ProjectComponent
       ],
       providers: [
         ProjectService

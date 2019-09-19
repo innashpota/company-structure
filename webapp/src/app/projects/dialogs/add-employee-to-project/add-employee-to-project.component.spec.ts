@@ -42,8 +42,8 @@ describe('AddEmployeeToProjectComponent', () => {
           useValue: {data: 'Project name'}
         }
       ]
-    });
-    component = TestBed.get(MatDialog);
+    })
+      .compileComponents();
   }));
 
   beforeEach(() => {

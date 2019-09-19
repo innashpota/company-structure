@@ -1,12 +1,26 @@
-language: java
-install: true
+matrix:
+  include:
+    - language: java
+      install: true
+      jdk:
+        - openjdk11
+      script:
+        - ./gradlew build
+        - ./gradlew check
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
 
-jdk:
-  - openjdk11
+    - language: node_js
+      node_js:
+        - 10
+      before_script:
+        - cd webapp
+        - npm i -g @angular/cli@8.3.12
+        - npm i
+      script: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
 
-script:
-  - ./gradlew build
-  - ./gradlew check
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+notifications:
+  email:
+    - shpota_inna@ukr.net

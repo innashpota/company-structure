@@ -67,5 +67,3 @@ webapp/dist
 webapp/tmp
 webapp/out-tsc
 webapp/browserslist
-webapp/karma.conf.js
-webapp/tsconfig.spec.json

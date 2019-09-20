@@ -64,6 +64,7 @@ webapp/*.iml
 webapp/node_modules
 # compiled output
 webapp/dist
+webapp/coverage/
 webapp/tmp
 webapp/out-tsc
 webapp/browserslist

@@ -15,6 +15,9 @@ describe('AddEmployeeToProjectComponent', () => {
   const mockRouter = {
     navigate: jasmine.createSpy('navigate')
   };
+  const dialogMock = {
+    close: () => { }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -35,7 +38,7 @@ describe('AddEmployeeToProjectComponent', () => {
         },
         {
           provide: MatDialogRef,
-          useValue: {}
+          useValue: dialogMock
         },
         {
           provide: MAT_DIALOG_DATA,
@@ -54,6 +57,18 @@ describe('AddEmployeeToProjectComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('form invalid when empty', () => {
+    expect(component.formControl.valid).toBeFalsy();
+  });
+
+  it('should onNoClick()', () => {
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+
+    component.onNoClick();
+
+    expect(spy).toHaveBeenCalled();
   });
 
   afterEach(() => {

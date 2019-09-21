@@ -15,6 +15,9 @@ describe('EditProjectTitleComponent', () => {
   const mockRouter = {
     navigate: jasmine.createSpy('navigate')
   };
+  const dialogMock = {
+    close: () => { }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -35,7 +38,7 @@ describe('EditProjectTitleComponent', () => {
         },
         {
           provide: MatDialogRef,
-          useValue: {}
+          useValue: dialogMock
         },
         {
           provide: MAT_DIALOG_DATA,
@@ -54,6 +57,26 @@ describe('EditProjectTitleComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('form invalid when empty', () => {
+    expect(component.formControl.valid).toBeFalsy();
+  });
+
+  it('should getErrorMessage()', () => {
+    const spy = spyOn(component.formControl, 'hasError');
+
+    component.getErrorMessage();
+
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should onNoClick()', () => {
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+
+    component.onNoClick();
+
+    expect(spy).toHaveBeenCalled();
   });
 
   afterEach(() => {

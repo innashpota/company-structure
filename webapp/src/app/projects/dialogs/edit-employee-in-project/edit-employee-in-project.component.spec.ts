@@ -16,6 +16,9 @@ describe('EditEmployeeInProjectComponent', () => {
   const mockRouter = {
     navigate: jasmine.createSpy('navigate')
   };
+  const dialogMock = {
+    close: () => { }
+  };
   const mockData = {
     projectName: 'Texas city',
     employeeId: 2
@@ -41,7 +44,7 @@ describe('EditEmployeeInProjectComponent', () => {
         },
         {
           provide: MatDialogRef,
-          useValue: {}
+          useValue: dialogMock
         },
         {
           provide: MAT_DIALOG_DATA,
@@ -60,6 +63,14 @@ describe('EditEmployeeInProjectComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should onNoClick()', () => {
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+
+    component.onNoClick();
+
+    expect(spy).toHaveBeenCalled();
   });
 
   afterEach(() => {

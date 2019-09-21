@@ -16,6 +16,9 @@ describe('EditEmployeeComponent', () => {
   const mockRouter = {
     navigate: jasmine.createSpy('navigate')
   };
+  const dialogMock = {
+    close: () => { }
+  };
   const employee = new Employee();
   employee.id = 123;
   employee.firstName = 'Hank';
@@ -43,7 +46,7 @@ describe('EditEmployeeComponent', () => {
         },
         {
           provide: MatDialogRef,
-          useValue: {}
+          useValue: dialogMock
         },
         {
           provide: MAT_DIALOG_DATA,
@@ -62,6 +65,26 @@ describe('EditEmployeeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('form invalid when empty', () => {
+    expect(component.formControl.valid).toBeFalsy();
+  });
+
+  it('should getErrorMessage()', () => {
+    const spy = spyOn(component.formControl, 'hasError');
+
+    component.getErrorMessage();
+
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should onNoClick()', () => {
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+
+    component.onNoClick();
+
+    expect(spy).toHaveBeenCalled();
   });
 
   afterEach(() => {

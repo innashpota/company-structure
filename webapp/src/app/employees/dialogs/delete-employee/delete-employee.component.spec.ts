@@ -15,6 +15,10 @@ describe('DeleteEmployeeComponent', () => {
   const mockRouter = {
     navigate: jasmine.createSpy('navigate')
   };
+  const dialogMock = {
+    close: () => {
+    }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -35,7 +39,7 @@ describe('DeleteEmployeeComponent', () => {
         },
         {
           provide: MatDialogRef,
-          useValue: {}
+          useValue: dialogMock
         },
         {
           provide: MAT_DIALOG_DATA,
@@ -54,6 +58,14 @@ describe('DeleteEmployeeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should onNoClick()', () => {
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+
+    component.onNoClick();
+
+    expect(spy).toHaveBeenCalled();
   });
 
   afterEach(() => {

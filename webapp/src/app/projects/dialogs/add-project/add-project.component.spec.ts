@@ -16,6 +16,9 @@ describe('AddProjectComponent', () => {
   const mockRouter = {
     navigate: jasmine.createSpy('navigate')
   };
+  const dialogMock = {
+    close: () => { }
+  };
   const project = new Project();
   project.id = 1234;
   project.name = 'Arlen the best';
@@ -41,7 +44,7 @@ describe('AddProjectComponent', () => {
         },
         {
           provide: MatDialogRef,
-          useValue: {}
+          useValue: dialogMock
         },
         {
           provide: MAT_DIALOG_DATA,
@@ -60,6 +63,26 @@ describe('AddProjectComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('form invalid when empty', () => {
+    expect(component.formControl.valid).toBeFalsy();
+  });
+
+  it('should getErrorMessage()', () => {
+    const spy = spyOn(component.formControl, 'hasError');
+
+    component.getErrorMessage();
+
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should onNoClick()', () => {
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+
+    component.onNoClick();
+
+    expect(spy).toHaveBeenCalled();
   });
 
   afterEach(() => {

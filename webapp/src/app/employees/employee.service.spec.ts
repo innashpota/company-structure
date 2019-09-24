@@ -12,12 +12,12 @@ import {environment} from '../../environments/environment';
 describe('EmployeeService', () => {
   let httpMock: HttpTestingController;
   let service: EmployeeService;
-  const firstEmployee = new Employee();
-  firstEmployee.id = 123;
-  firstEmployee.firstName = 'Peggy';
-  firstEmployee.lastName = 'Hill';
-  firstEmployee.gender = 'F';
-  firstEmployee.city = 'Texas';
+  const employee = new Employee();
+  employee.id = 123;
+  employee.firstName = 'Peggy';
+  employee.lastName = 'Hill';
+  employee.gender = 'F';
+  employee.city = 'Texas';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -42,28 +42,28 @@ describe('EmployeeService', () => {
   });
 
   it('should add() and call POST method', () => {
-    service.add(firstEmployee).subscribe(employee =>
-      expect(employee).toEqual(firstEmployee)
+    service.add(employee).subscribe(employee =>
+      expect(employee).toEqual(employee)
     );
 
     const request = httpMock.expectOne(`${environment.url}/employees`);
 
     expect(request.request.method).toEqual('POST');
     expect(request.request.headers).toEqual(service.headers);
-    request.flush(firstEmployee);
+    request.flush(employee);
     httpMock.verify();
   });
 
   it('should edit() and call PUT method', () => {
-    service.edit(firstEmployee).subscribe(employee =>
-      expect(employee).toEqual(firstEmployee)
+    service.edit(employee).subscribe(employee =>
+      expect(employee).toEqual(employee)
     );
 
     const request = httpMock.expectOne(`${environment.url}/employees/123`);
 
     expect(request.request.method).toEqual('PUT');
     expect(request.request.headers).toEqual(service.headers);
-    request.flush(firstEmployee);
+    request.flush(employee);
     httpMock.verify();
   });
 
@@ -81,14 +81,14 @@ describe('EmployeeService', () => {
 
   it('should getAll() and call GET method', () => {
     service.getAll().subscribe(employees =>
-      expect(employees).toEqual([firstEmployee])
+      expect(employees).toEqual([employee])
     );
 
     const request = httpMock.expectOne(`${environment.url}/employees`);
 
     expect(request.request.method).toEqual('GET');
     expect(request.request.headers).toEqual(service.headers);
-    request.flush([firstEmployee]);
+    request.flush([employee]);
     httpMock.verify();
   });
 

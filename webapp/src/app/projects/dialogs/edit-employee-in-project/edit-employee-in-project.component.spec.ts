@@ -4,11 +4,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Router} from '@angular/router';
+import {of} from 'rxjs';
 
 import {EditEmployeeInProjectComponent} from './edit-employee-in-project.component';
 import {MaterialModule} from '../../../material/material.module';
 import {ProjectService} from '../../project.service';
 import {EmployeeService} from '../../../employees/employee.service';
+import {Employee} from '../../../employees/employee';
 
 describe('EditEmployeeInProjectComponent', () => {
   let component: EditEmployeeInProjectComponent;
@@ -23,6 +25,12 @@ describe('EditEmployeeInProjectComponent', () => {
     projectName: 'Texas city',
     employeeId: 2
   };
+  const employee = new Employee();
+  employee.id = 123;
+  employee.firstName = 'Peggy';
+  employee.lastName = 'Hill';
+  employee.gender = 'F';
+  employee.city = 'Texas';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -63,6 +71,25 @@ describe('EditEmployeeInProjectComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should ngOnInit()', () => {
+    const employees = [employee];
+    const spy = spyOn(component['employeeService'], 'getAll')
+      .and.returnValue(of(employees));
+
+    component.ngOnInit();
+
+    expect(spy).toHaveBeenCalled();
+    expect(component.employees).toEqual(employees);
+  });
+
+  it('should ngOnDestroy()', () => {
+    const spy = spyOn(component['subscription'], 'unsubscribe');
+
+    component.ngOnDestroy();
+
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should onNoClick()', () => {

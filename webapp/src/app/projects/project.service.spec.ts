@@ -6,7 +6,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ProjectService} from './project.service';
 import {MaterialModule} from '../material/material.module';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {EmployeeService} from '../employees/employee.service';
 import {environment} from '../../environments/environment';
 import {Project} from './project';
 

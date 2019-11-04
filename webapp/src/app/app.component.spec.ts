@@ -1,35 +1,77 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+import {TestBed} from '@angular/core/testing';
+import {RouterModule, Routes} from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+
+import {AppComponent} from './app.component';
+import {MaterialModule} from './material/material.module';
+import {EmployeesComponent} from './employees/employees.component';
+import {ProjectComponent} from './projects/project.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {ProjectService} from './projects/project.service';
+import {EmployeeService} from './employees/employee.service';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  let component: AppComponent;
+
+  const testRoutes: Routes = [
+    {
+      path: 'employees',
+      component: EmployeesComponent
+    },
+    {
+      path: 'projects',
+      component: ProjectComponent
+    },
+    {
+      path: '',
+      redirectTo: '/employees',
+      pathMatch: 'full'
+    },
+    {
+      path: '**',
+      component: PageNotFoundComponent
+    }
+  ];
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        BrowserModule,
+        HttpClientModule,
+        MaterialModule,
+        RouterModule.forRoot(testRoutes),
+        BrowserAnimationsModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        EmployeesComponent,
+        PageNotFoundComponent,
+        ProjectComponent
       ],
+      providers: [
+        ProjectService,
+        EmployeeService
+      ]
     }).compileComponents();
-  }));
+
+    const fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-  it(`should have as title 'company-structure'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('company-structure');
+  it(`should have 'Company structure' as a title`, () => {
+    const title = 'Company structure';
+
+    expect(component.title).toEqual(title);
   });
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to company-structure!');
+  afterEach(() => {
+    TestBed.resetTestingModule();
   });
 });

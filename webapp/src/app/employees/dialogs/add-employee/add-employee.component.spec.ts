@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
 
 import {AddEmployeeComponent} from './add-employee.component';
 import {Employee} from '../../employee';
@@ -15,6 +16,9 @@ describe('AddEmployeeComponent', () => {
   let fixture: ComponentFixture<AddEmployeeComponent>;
   const mockRouter = {
     navigate: jasmine.createSpy('navigate')
+  };
+  const dialogMock = {
+    close: () => { }
   };
   const employee = new Employee();
   employee.id = 123;
@@ -30,7 +34,8 @@ describe('AddEmployeeComponent', () => {
         BrowserModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        MaterialModule
+        MaterialModule,
+        FormsModule
       ],
       declarations: [
         AddEmployeeComponent
@@ -43,7 +48,7 @@ describe('AddEmployeeComponent', () => {
         },
         {
           provide: MatDialogRef,
-          useValue: {}
+          useValue: dialogMock
         },
         {
           provide: MAT_DIALOG_DATA,
@@ -62,6 +67,26 @@ describe('AddEmployeeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('form invalid when empty', () => {
+    expect(component.formControl.valid).toBeFalsy();
+  });
+
+  it('should getErrorMessage()', () => {
+    const spy = spyOn(component.formControl, 'hasError');
+
+    component.getErrorMessage();
+
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should onNoClick()', () => {
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
+
+    component.onNoClick();
+
+    expect(spy).toHaveBeenCalled();
   });
 
   afterEach(() => {

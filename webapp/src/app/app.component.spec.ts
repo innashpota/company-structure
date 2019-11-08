@@ -1,8 +1,10 @@
-import {TestBed} from '@angular/core/testing';
-import {RouterModule, Routes} from '@angular/router';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {Router, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
+import {Location} from '@angular/common';
+import {RouterTestingModule} from '@angular/router/testing';
 
 import {AppComponent} from './app.component';
 import {MaterialModule} from './material/material.module';
@@ -14,6 +16,8 @@ import {EmployeeService} from './employees/employee.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
+  let location: Location;
+  let router: Router;
 
   const testRoutes: Routes = [
     {
@@ -41,7 +45,7 @@ describe('AppComponent', () => {
         BrowserModule,
         HttpClientModule,
         MaterialModule,
-        RouterModule.forRoot(testRoutes),
+        RouterTestingModule.withRoutes(testRoutes),
         BrowserAnimationsModule
       ],
       declarations: [
@@ -56,9 +60,14 @@ describe('AppComponent', () => {
       ]
     }).compileComponents();
 
+    router = TestBed.get(Router);
+    location = TestBed.get(Location);
+
     const fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    router.initialNavigation();
   });
 
   it('should create the app', () => {
@@ -69,6 +78,29 @@ describe('AppComponent', () => {
     const title = 'Company structure';
 
     expect(component.title).toEqual(title);
+  });
+
+  it('navigate to "" redirects you to /employees', fakeAsync(() => {
+    router.navigate(['']);
+    tick();
+    expect(location.path()).toBe('/employees');
+  }));
+
+  it('navigate to "/employees"', fakeAsync(() => {
+    router.navigate(['/employees']);
+    tick();
+    expect(location.path()).toBe('/employees');
+  }));
+
+  it('navigate to "/projects"', fakeAsync(() => {
+    router.navigate(['/projects']);
+    tick();
+    expect(location.path()).toBe('/projects');
+  }));
+
+  it('should setup the media query', () => {
+    expect(component.mobileQuery).toBeTruthy();
+    expect(component.mobileQueryListener).toBeDefined();
   });
 
   afterEach(() => {

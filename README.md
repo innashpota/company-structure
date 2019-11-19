@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/shpotainna/company-structure.svg?branch=master)](https://travis-ci.com/shpotainna/company-structure)
-[![codecov](https://codecov.io/gh/shpotainna/company-structure/branch/master/graph/badge.svg)](https://codecov.io/gh/shpotainna/company-structure)
+[![](https://img.shields.io/codecov/c/github/shpotainna/company-structure?color=green&logo=test%20coverage)](https://codecov.io/gh/shpotainna/company-structure)
 
 Company Structure 
 =================

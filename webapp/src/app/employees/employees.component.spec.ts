@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {of} from 'rxjs';
+import {of, Subscription} from 'rxjs';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 import {EmployeesComponent} from './employees.component';
@@ -47,8 +47,7 @@ describe('EmployeesComponent', () => {
           useValue: jasmine.createSpyObj('MatDialogRef', ['afterClosed'])
         }
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -66,6 +65,15 @@ describe('EmployeesComponent', () => {
     const spy = spyOn(component, 'refreshTable');
 
     component.ngOnInit();
+
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should ngOnDestroy()', () => {
+    component['subscription'] = new Subscription();
+    const spy = spyOn(component['subscription'], 'unsubscribe');
+
+    component.ngOnDestroy();
 
     expect(spy).toHaveBeenCalled();
   });

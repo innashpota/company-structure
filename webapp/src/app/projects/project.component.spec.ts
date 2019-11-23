@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {of} from 'rxjs';
+import {of, Subscription} from 'rxjs';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 
@@ -58,8 +58,7 @@ describe('ProjectComponent', () => {
           useValue: jasmine.createSpyObj('MatDialogRef', ['afterClosed'])
         }
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -77,6 +76,15 @@ describe('ProjectComponent', () => {
     const spy = spyOn(component, 'refreshTable');
 
     component.ngOnInit();
+
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should ngOnDestroy()', () => {
+    component['subscription'] = new Subscription();
+    const spy = spyOn(component['subscription'], 'unsubscribe');
+
+    component.ngOnDestroy();
 
     expect(spy).toHaveBeenCalled();
   });
@@ -242,6 +250,14 @@ describe('ProjectComponent', () => {
       expect(spyPush).toHaveBeenCalled();
       expect(spyRefreshTable).toHaveBeenCalled();
     });
+  });
+
+  it('should deleteEmployee()', () => {
+    const spy = spyOn(component['service'], 'deleteEmployee').and.callThrough();
+
+    component.deleteEmployee(123, 24);
+
+    expect(spy).toHaveBeenCalled();
   });
 
   afterEach(() => {
